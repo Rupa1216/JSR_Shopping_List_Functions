@@ -19,10 +19,11 @@
 			OPTIONAL:
 				- validate that item has fewer than 10 characters
 				- validate that price is less than 100 and has only
-					two decimal places
+					two decimal places # test
 	*/
 
 	// implement function here
+
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
