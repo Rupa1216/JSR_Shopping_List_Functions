@@ -22,7 +22,12 @@
 					two decimal places
 	*/
 
-	// implement function here
+	const newShoppingListItem = (item, price) => {
+		return {
+			item,
+			price
+		}
+	}
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
