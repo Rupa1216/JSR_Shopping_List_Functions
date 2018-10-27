@@ -141,7 +141,14 @@ const removeFromShoppingList = arr => {
 				and then return the array
 	*/
 
-	// implement function here
+const removeFirstItem = (arr) => {
+	if (arr.length === 0) {
+		return arr;
+	}
+	else if (arr.length > 0) {
+		return arr.slice(1);
+	}
+}
 
 	// TEST
 	describe('4. removeFirstItem', () => {
