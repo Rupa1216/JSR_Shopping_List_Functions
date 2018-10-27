@@ -22,6 +22,8 @@
 					two decimal places # test
 	*/
 
+	// SOLUTION TO PROBLEM 1
+
 	const newShoppingListItem = (item, price) => {
 		return {
 			item,
@@ -57,9 +59,15 @@
 				- if shoppingList item is not passed in, throw error
 	*/
 
-	// implement function here
+	// SOLUTION TO NUMBER 2
+
+	const addToShoppingList = (item, list=[]) => {
+		list.push(item);
+		return list;
+	}
 
 	// TEST
+
 	describe('2. addToShoppingList', () => {
 
 		it('should return a list', () => {
