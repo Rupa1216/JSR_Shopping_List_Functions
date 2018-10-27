@@ -98,7 +98,16 @@
 				and then return the array
 	*/
 
-	// implement function here
+	// SOLUTION TO NUMBER 3
+
+const removeFromShoppingList = arr => {
+	if (arr.length === 0) {
+		return arr;
+	}
+	else if (arr.length > 0) {
+		return arr.slice(0, arr.length-1);
+	}
+}
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
