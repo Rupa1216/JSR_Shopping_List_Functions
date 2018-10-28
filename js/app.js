@@ -186,7 +186,20 @@ const removeFirstItem = (arr) => {
 			^^ return error
 	*/
 
-	// implement function here
+// SOLUTION TO NUMBER 5
+
+const removeNthItem = (i, list) => {
+	if (typeof(i) !== "number" || i < 0 || i > list.length) {
+		throw new Error('invalid input')
+	}
+	if (i < list.length) {
+		let newList1 = list.slice(0, i)
+		let newList2 = list.slice(i+1)
+		// all the indices before and after i
+		return newList1.concat(newList2);
+	}
+	
+}
 
 	// TEST
 	describe('5. removeNthItem', () => {
