@@ -1,4 +1,4 @@
-(function() { // protect the lemmings!
+(function () { // protect the lemmings!
 
 	/* 1
 		@function newShoppingListItem
@@ -61,7 +61,7 @@
 
 	// SOLUTION TO NUMBER 2
 
-	const addToShoppingList = (item, list=[]) => {
+	const addToShoppingList = (item, list = []) => {
 		list.push(item);
 		return list;
 	}
@@ -100,14 +100,14 @@
 
 	// SOLUTION TO NUMBER 3
 
-const removeFromShoppingList = arr => {
-	if (arr.length === 0) {
-		return arr;
+	const removeFromShoppingList = arr => {
+		if (arr.length === 0) {
+			return arr;
+		}
+		else if (arr.length > 0) {
+			return arr.slice(0, arr.length - 1);
+		}
 	}
-	else if (arr.length > 0) {
-		return arr.slice(0, arr.length-1);
-	}
-}
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -141,14 +141,16 @@ const removeFromShoppingList = arr => {
 				and then return the array
 	*/
 
-const removeFirstItem = (arr) => {
-	if (arr.length === 0) {
-		return arr;
+	// SOLUTION TO NUMBER 4
+
+	const removeFirstItem = (arr) => {
+		if (arr.length === 0) {
+			return arr;
+		}
+		else if (arr.length > 0) {
+			return arr.slice(1);
+		}
 	}
-	else if (arr.length > 0) {
-		return arr.slice(1);
-	}
-}
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -186,19 +188,19 @@ const removeFirstItem = (arr) => {
 			^^ return error
 	*/
 
-// SOLUTION TO NUMBER 5
+	// SOLUTION TO NUMBER 5
 
-const removeNthItem = (i, list) => {
-	if (typeof(i) !== "number" || i < 0 || i > list.length) {
-		throw new Error('invalid input')
+	const removeNthItem = (i, list) => {
+		if (typeof (i) !== "number" || i < 0 || i > list.length) {
+			throw new Error('invalid input')
+		}
+		if (i < list.length) {
+			let newList1 = list.slice(0, i)
+			let newList2 = list.slice(i + 1)
+			// all the indices before and after i
+			return newList1.concat(newList2);
+		}
 	}
-	if (i < list.length) {
-		let newList1 = list.slice(0, i)
-		let newList2 = list.slice(i+1)
-		// all the indices before and after i
-		return newList1.concat(newList2);
-	}
-}
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -268,16 +270,18 @@ const removeNthItem = (i, list) => {
 			^^ return error
 	*/
 
-const removeNItems = (i, num, list) => {
-	if (typeof(i) !== "number" || typeof(num) !== "number" || i < 0 || i+num > list.length || num > list.length) {
-		throw new Error('invalid input')
-	}
-	let slice1 = list.slice(0, i+1)
-	// let slice1 = list.slice(i, num+1)
-	let slice2 = list.slice(num+1)
+	// SOLUTION TO NUMBER 6
 
-	return slice1.concat(slice2);
-}
+	const removeNItems = (i, num, list) => {
+		if (typeof (i) !== "number" || typeof (num) !== "number" || i < 0 || i + num > list.length || num > list.length) {
+			throw new Error('invalid input')
+		}
+		let slice1 = list.slice(0, i + 1)
+		// let slice1 = list.slice(i, num+1)
+		let slice2 = list.slice(num + 1)
+
+		return slice1.concat(slice2);
+	}
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -356,7 +360,9 @@ const removeNItems = (i, num, list) => {
 				from START of list
 	*/
 
-	// implement function here
+	const smartRemoveItems =(i, list) => {
+		
+	}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -510,7 +516,7 @@ const removeNItems = (i, num, list) => {
 				spliceItems([{
 					'item': 'test',
 					'price': 1,
-				},'invalidItem'], 0, [])
+				}, 'invalidItem'], 0, [])
 			}, Error);
 		});
 
@@ -590,7 +596,7 @@ const removeNItems = (i, num, list) => {
 				combineLists([{
 					'item': 'test',
 					'price': 1,
-				},'invalidItem'], [{
+				}, 'invalidItem'], [{
 					'item': 'test2',
 					'price': 2,
 				}])
@@ -599,12 +605,12 @@ const removeNItems = (i, num, list) => {
 
 		it('should return single list with items of both lists', () => {
 			const list = combineLists([{
-					'item': 'test',
-					'price': 1,
-				}], [{
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}], [{
+				'item': 'test2',
+				'price': 2,
+			}]);
 
 			chai.assert.equal(list[0].item, 'test')
 			chai.assert.equal(list[0].price, 1)
@@ -639,12 +645,12 @@ const removeNItems = (i, num, list) => {
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
 			const [list1, list2] = splitListAt(1, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
 
 			chai.assert.equal(list1[0].item, 'test')
 			chai.assert.equal(list1[0].price, 1)
@@ -656,12 +662,12 @@ const removeNItems = (i, num, list) => {
 
 		it('should put all items into list1 if i < 0', () => {
 			const [list1, list2] = splitListAt(-1, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
 
 			chai.assert.equal(list1[0].item, 'test')
 			chai.assert.equal(list1[0].price, 1)
@@ -673,12 +679,12 @@ const removeNItems = (i, num, list) => {
 
 		it('should put all items into list2 if i > length of list', () => {
 			const [list1, list2] = splitListAt(100, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
 
 			chai.assert.equal(list1.length, 0)
 			chai.assert.equal(list2[0].item, 'test')
@@ -691,12 +697,12 @@ const removeNItems = (i, num, list) => {
 
 		it('should return two lists', () => {
 			const [list1, list2] = splitListAt(1, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
 
 			chai.assert.isArray(list1)
 			chai.assert.isArray(list2)
@@ -713,18 +719,22 @@ const removeNItems = (i, num, list) => {
 			in list, return true
 	*/
 
-	// implement function here
+	const canExpressCheckout = (array) => {
+		if (array.length < 10) {
+			return true
+		}
+	}
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
 			chai.assert.equal(canExpressCheckout([{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]), true);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]), true);
 		})
 	});
 
@@ -747,12 +757,12 @@ const removeNItems = (i, num, list) => {
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
 			const sum = computeSum([{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
 
 			chai.assert.equal(sum, 3);
 		});
@@ -781,15 +791,15 @@ const removeNItems = (i, num, list) => {
 	describe('14. computeSumWithTax', () => {
 		it('should return sum of all item prices in array + taxes', () => {
 			const sum = computeSumWithTax([{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}], 10);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}], 10);
 
 			// stupid hack to prevent the 3.3000000000000003 error...
-			chai.assert.equal(Math.floor(100*sum)/100, 3.3);
+			chai.assert.equal(Math.floor(100 * sum) / 100, 3.3);
 		});
 	});
 
@@ -846,7 +856,7 @@ const removeNItems = (i, num, list) => {
 		})
 
 		it('should sum all the price items FROM start index `i` and end index `j` and return value', () => {
-			const sum =  computeSumInRange(1, 3, [
+			const sum = computeSumInRange(1, 3, [
 				newShoppingListItem('test', 1),
 				newShoppingListItem('test2', 2),
 				newShoppingListItem('test3', 3),
