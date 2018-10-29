@@ -198,7 +198,6 @@ const removeNthItem = (i, list) => {
 		// all the indices before and after i
 		return newList1.concat(newList2);
 	}
-	
 }
 
 	// TEST
@@ -269,7 +268,16 @@ const removeNthItem = (i, list) => {
 			^^ return error
 	*/
 
-	// implement function here
+const removeNItems = (i, num, list) => {
+	if (typeof(i) !== "number" || typeof(num) !== "number" || i < 0 || i+num > list.length || num > list.length) {
+		throw new Error('invalid input')
+	}
+	let slice1 = list.slice(0, i+1)
+	// let slice1 = list.slice(i, num+1)
+	let slice2 = list.slice(num+1)
+
+	return slice1.concat(slice2);
+}
 
 	// TEST
 	describe('6. removeNItems', () => {
