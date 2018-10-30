@@ -276,9 +276,8 @@
 		if (typeof (i) !== "number" || typeof (num) !== "number" || i < 0 || i + num > list.length || num > list.length) {
 			throw new Error('invalid input')
 		}
-		let slice1 = list.slice(0, i + 1)
-		// let slice1 = list.slice(i, num+1)
-		let slice2 = list.slice(num + 1)
+		let slice1 = list.slice(0, i)
+		let slice2 = list.slice(i + num + 1)
 
 		return slice1.concat(slice2);
 	}
@@ -360,8 +359,18 @@
 				from START of list
 	*/
 
-	const smartRemoveItems =(i, list) => {
-		
+	const smartRemoveItems = (i, list) => {
+		if (i < 0) {
+		 list.splice(i);
+		}
+		else if (i > list.length) {
+			return list;
+		}
+		else if (i > 0) {
+			 list.splice(0, i);
+		}
+
+		return list;
 	}
 
 	// TEST
