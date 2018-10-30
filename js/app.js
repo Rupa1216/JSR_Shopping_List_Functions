@@ -449,7 +449,21 @@
 			- if i < 0, just prepend
 	*/
 
-	// implement function here
+	const spliceItem = (item, i, list) => {
+		if (typeof(item) !== "object") {
+			throw new Error('invalid input')
+		}
+		if (i < 0) {
+			list.unshift(item);
+		}
+		else if (i > list.length) {
+			list.push(item);
+		}
+		else {
+			list.splice(i, 0, item)
+		}
+		return list;
+	}
 
 	// TEST
 	describe('8. spliceItem', () => {
