@@ -361,13 +361,13 @@
 
 	const smartRemoveItems = (i, list) => {
 		if (i < 0) {
-		 list.splice(i);
+			list.splice(i);
 		}
 		else if (i > list.length) {
 			return list;
 		}
 		else if (i > 0) {
-			 list.splice(0, i);
+			list.splice(0, i);
 		}
 
 		return list;
@@ -450,7 +450,7 @@
 	*/
 
 	const spliceItem = (item, i, list) => {
-		if (typeof(item) !== "object") {
+		if (typeof (item) !== "object") {
 			throw new Error('invalid input')
 		}
 		if (i < 0) {
@@ -530,7 +530,25 @@
 			- if `items` is empty, return list
 	*/
 
-	// implement function here
+	const spliceItems = (items, i, list) => {
+		for (let j = 0; j < items.length; j++) {
+
+			if (typeof (items[j]) !== "object") {
+				throw new Error('Invalid input');
+			}
+		}
+			if (i > list.length) {
+				list.push(...items);
+			}
+			if (i < 0) {
+				list.unshift(...items);
+			}
+			else if (list.length === 0) {
+				return list;
+			}
+		list.splice(i, 0, ...items);
+		return list;
+	}
 
 	// TEST
 	describe('9. spliceItems', () => {
