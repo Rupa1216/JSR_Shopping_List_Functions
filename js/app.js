@@ -663,282 +663,296 @@
 		return newArray;
 	}
 
-		// TEST
-		describe('10. combineLists', () => {
-			it('should throw an error if item is not valid', () => {
-				chai.assert.throws(() => {
-					combineLists([{
-						'item': 'test',
-						'price': 1,
-					}, 'invalidItem'], [{
-						'item': 'test2',
-						'price': 2,
-					}])
-				}, Error);
-			});
-
-			it('should return single list with items of both lists', () => {
-				const list = combineLists([{
+	// TEST
+	describe('10. combineLists', () => {
+		it('should throw an error if item is not valid', () => {
+			chai.assert.throws(() => {
+				combineLists([{
 					'item': 'test',
 					'price': 1,
-				}], [{
+				}, 'invalidItem'], [{
 					'item': 'test2',
 					'price': 2,
-				}]);
-
-				chai.assert.equal(list[0].item, 'test')
-				chai.assert.equal(list[0].price, 1)
-				chai.assert.equal(list[1].item, 'test2')
-				chai.assert.equal(list[1].price, 2)
-			});
+				}])
+			}, Error);
 		});
 
-		/* 11
-			@function splitListAt
-			@param i {number}
-			@param list {array, []}
-			@returns list
-			@description
-				given a number i that is within bounds of
-				`list`, break it into two lists where
-				`list1` has all items less than or equal to i
-				and `list2` has all items > i
-				- if `i` < 0, `list1` has all items and `list2`
-					is empty list
-				- if `i` > length of list, list1 is empty and `list2`
-					has all items
-	
-				- always return a list that looks like this:
-					[list1, list2]
-	
-		*/
+		it('should return single list with items of both lists', () => {
+			const list = combineLists([{
+				'item': 'test',
+				'price': 1,
+			}], [{
+				'item': 'test2',
+				'price': 2,
+			}]);
 
-		// implement function here
-
-		// TEST
-		describe('11. splitListAt', () => {
-			it('should break list into two at index', () => {
-				const [list1, list2] = splitListAt(1, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
-
-				chai.assert.equal(list1[0].item, 'test')
-				chai.assert.equal(list1[0].price, 1)
-				chai.assert.equal(list1[1].item, 'test2')
-				chai.assert.equal(list1[1].price, 2)
-				chai.assert.equal(list2.length, 0)
-
-			});
-
-			it('should put all items into list1 if i < 0', () => {
-				const [list1, list2] = splitListAt(-1, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
-
-				chai.assert.equal(list1[0].item, 'test')
-				chai.assert.equal(list1[0].price, 1)
-				chai.assert.equal(list1[1].item, 'test2')
-				chai.assert.equal(list1[1].price, 2)
-				chai.assert.equal(list2.length, 0)
-
-			});
-
-			it('should put all items into list2 if i > length of list', () => {
-				const [list1, list2] = splitListAt(100, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
-
-				chai.assert.equal(list1.length, 0)
-				chai.assert.equal(list2[0].item, 'test')
-				chai.assert.equal(list2[0].price, 1)
-				chai.assert.equal(list2[1].item, 'test2')
-				chai.assert.equal(list2[1].price, 2)
-
-
-			});
-
-			it('should return two lists', () => {
-				const [list1, list2] = splitListAt(1, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
-
-				chai.assert.isArray(list1)
-				chai.assert.isArray(list2)
-			})
-
+			chai.assert.equal(list[0].item, 'test')
+			chai.assert.equal(list[0].price, 1)
+			chai.assert.equal(list[1].item, 'test2')
+			chai.assert.equal(list[1].price, 2)
 		});
+	});
 
-		/* 12
-			@function canExpressCheckout
-			@param list {array, []}
-			@returns {boolean}
-			@description
-				if there are fewer than 10 items
-				in list, return true
-		*/
+	/* 11
+		@function splitListAt
+		@param i {number}
+		@param list {array, []}
+		@returns list
+		@description
+			given a number i that is within bounds of
+			`list`, break it into two lists where
+			`list1` has all items less than or equal to i
+			and `list2` has all items > i
+			- if `i` < 0, `list1` has all items and `list2`
+				is empty list
+			- if `i` > length of list, list1 is empty and `list2`
+				has all items
+	
+			- always return a list that looks like this:
+				[list1, list2]
+	
+	*/
 
-		const canExpressCheckout = (array) => {
-			if (array.length < 10) {
-				return true
-			}
+	const splitListAt = (i, list = []) => {
+		let list1 = []
+		let list2 = []
+		if (i < 0) {
+			list1 = list
 		}
+		else if (i >= list.length) {
+			list2 = list
+		}
+		else {
+			list1 = list.slice(0, i + 1)
+			list2 = list.slice(i + 1)
+		}
+		return [list1, list2]
+	}
 
-		// TEST
-		describe('12. canExpressCheckout', () => {
-			it('should return true if num items < 10', () => {
-				chai.assert.equal(canExpressCheckout([{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]), true);
-			})
+	// TEST
+	describe('11. splitListAt', () => {
+		it('should break list into two at index', () => {
+			const [list1, list2] = splitListAt(1, [{
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
+
+			chai.assert.equal(list1[0].item, 'test')
+			chai.assert.equal(list1[0].price, 1)
+			chai.assert.equal(list1[1].item, 'test2')
+			chai.assert.equal(list1[1].price, 2)
+			chai.assert.equal(list2.length, 0)
+
 		});
 
-		/* 13
-			@function computeSum
-			@param list {array, []}
-			@returns {number}
-			@description
-				given a list of objects that look like this:
-				{
-					'item': 'eggs',
-					'price': 1.59
-				}
-				- sum all the price items and return value
-		*/
+		it('should put all items into list1 if i < 0', () => {
+			const [list1, list2] = splitListAt(-1, [{
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
 
-		// implement function here
+			chai.assert.equal(list1[0].item, 'test')
+			chai.assert.equal(list1[0].price, 1)
+			chai.assert.equal(list1[1].item, 'test2')
+			chai.assert.equal(list1[1].price, 2)
+			chai.assert.equal(list2.length, 0)
 
-		// TEST
-		describe('13. computeSum', () => {
-			it('should return sum of all item prices in array', () => {
-				const sum = computeSum([{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
-
-				chai.assert.equal(sum, 3);
-			});
 		});
 
-		/* 14
-			@function computeSumWithTax
-			@param list {array, []}
-			@param taxRate {number, 8.125}
-			@returns {number}
-			@description
-				given a list of objects that look like this:
-				{
-					'item': 'eggs',
-					'price': 1.59
-				}
-				- sum all the price items and return value AND
-					apply tax value
-				- note that tax is passed in as percent not decimal
+		it('should put all items into list2 if i > length of list', () => {
+			const [list1, list2] = splitListAt(100, [{
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
+
+			chai.assert.equal(list1.length, 0)
+			chai.assert.equal(list2[0].item, 'test')
+			chai.assert.equal(list2[0].price, 1)
+			chai.assert.equal(list2[1].item, 'test2')
+			chai.assert.equal(list2[1].price, 2)
+
+
+		});
+
+		it('should return two lists', () => {
+			const [list1, list2] = splitListAt(1, [{
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
+
+			chai.assert.isArray(list1)
+			chai.assert.isArray(list2)
+		})
+
+	});
+
+	/* 12
+		@function canExpressCheckout
+		@param list {array, []}
+		@returns {boolean}
+		@description
+			if there are fewer than 10 items
+			in list, return true
+	*/
+
+	const canExpressCheckout = (array) => {
+		if (array.length < 10) {
+			return true
+		}
+	}
+
+	// TEST
+	describe('12. canExpressCheckout', () => {
+		it('should return true if num items < 10', () => {
+			chai.assert.equal(canExpressCheckout([{
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]), true);
+		})
+	});
+
+	/* 13
+		@function computeSum
+		@param list {array, []}
+		@returns {number}
+		@description
+			given a list of objects that look like this:
+			{
+				'item': 'eggs',
+				'price': 1.59
+			}
+			- sum all the price items and return value
+	*/
+
+	// implement function here
+
+	// TEST
+	describe('13. computeSum', () => {
+		it('should return sum of all item prices in array', () => {
+			const sum = computeSum([{
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
+
+			chai.assert.equal(sum, 3);
+		});
+	});
+
+	/* 14
+		@function computeSumWithTax
+		@param list {array, []}
+		@param taxRate {number, 8.125}
+		@returns {number}
+		@description
+			given a list of objects that look like this:
+			{
+				'item': 'eggs',
+				'price': 1.59
+			}
+			- sum all the price items and return value AND
+				apply tax value
+			- note that tax is passed in as percent not decimal
 	
-		*/
+	*/
 
-		// implement function here
+	// implement function here
 
-		// TEST
-		describe('14. computeSumWithTax', () => {
-			it('should return sum of all item prices in array + taxes', () => {
-				const sum = computeSumWithTax([{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}], 10);
+	// TEST
+	describe('14. computeSumWithTax', () => {
+		it('should return sum of all item prices in array + taxes', () => {
+			const sum = computeSumWithTax([{
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}], 10);
 
-				// stupid hack to prevent the 3.3000000000000003 error...
-				chai.assert.equal(Math.floor(100 * sum) / 100, 3.3);
-			});
+			// stupid hack to prevent the 3.3000000000000003 error...
+			chai.assert.equal(Math.floor(100 * sum) / 100, 3.3);
 		});
+	});
 
-		/* 15
-			@function computeSumInRange
-			@param i {number}
-			@param j {number}
-			@param list {array, []}
-			@returns {number}
-			@description
-				given a list of objects that look like this:
-				{
-					'item': 'eggs',
-					'price': 1.59
-				}
-				- sum all the price items FROM start index `i` and
-					end index `j` and return value
-				- if i > j, throw error
-				- if i or j not in range, throw error
-		*/
+	/* 15
+		@function computeSumInRange
+		@param i {number}
+		@param j {number}
+		@param list {array, []}
+		@returns {number}
+		@description
+			given a list of objects that look like this:
+			{
+				'item': 'eggs',
+				'price': 1.59
+			}
+			- sum all the price items FROM start index `i` and
+				end index `j` and return value
+			- if i > j, throw error
+			- if i or j not in range, throw error
+	*/
 
-		// implement function here
+	// implement function here
 
-		// TEST
-		describe('15. computeSumInRange', () => {
-			it('should throw error if i > j', () => {
-				chai.assert.throws(() => {
-					computeSumInRange(100, 1, [])
-				}, Error)
-			})
+	// TEST
+	describe('15. computeSumInRange', () => {
+		it('should throw error if i > j', () => {
+			chai.assert.throws(() => {
+				computeSumInRange(100, 1, [])
+			}, Error)
+		})
 
-			it('should throw error if i < 0', () => {
-				chai.assert.throws(() => {
-					computeSumInRange(-1, 1, [])
-				}, Error)
-			})
+		it('should throw error if i < 0', () => {
+			chai.assert.throws(() => {
+				computeSumInRange(-1, 1, [])
+			}, Error)
+		})
 
-			it('should throw error if i > length of list', () => {
-				chai.assert.throws(() => {
-					computeSumInRange(100, 101, [])
-				}, Error)
-			})
+		it('should throw error if i > length of list', () => {
+			chai.assert.throws(() => {
+				computeSumInRange(100, 101, [])
+			}, Error)
+		})
 
-			it('should throw error if j < 0', () => {
-				chai.assert.throws(() => {
-					computeSumInRange(0, -1, [])
-				}, Error)
-			})
+		it('should throw error if j < 0', () => {
+			chai.assert.throws(() => {
+				computeSumInRange(0, -1, [])
+			}, Error)
+		})
 
-			it('should throw error if j > length of list', () => {
-				chai.assert.throws(() => {
-					computeSumInRange(0, 100, [])
-				}, Error)
-			})
+		it('should throw error if j > length of list', () => {
+			chai.assert.throws(() => {
+				computeSumInRange(0, 100, [])
+			}, Error)
+		})
 
-			it('should sum all the price items FROM start index `i` and end index `j` and return value', () => {
-				const sum = computeSumInRange(1, 3, [
-					newShoppingListItem('test', 1),
-					newShoppingListItem('test2', 2),
-					newShoppingListItem('test3', 3),
-					newShoppingListItem('test4', 4)
-				]);
+		it('should sum all the price items FROM start index `i` and end index `j` and return value', () => {
+			const sum = computeSumInRange(1, 3, [
+				newShoppingListItem('test', 1),
+				newShoppingListItem('test2', 2),
+				newShoppingListItem('test3', 3),
+				newShoppingListItem('test4', 4)
+			]);
 
-				chai.assert.equal(sum, 9)
-			})
-		});
+			chai.assert.equal(sum, 9)
+		})
+	});
 
-	})();
+})();
